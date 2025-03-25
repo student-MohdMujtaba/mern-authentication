@@ -8,13 +8,14 @@ import userRouter from "./routes/userRoutes.js";
 
 const app = express();
 const port = process.env.PORT || 4000;
-connectDB();
+app.use(express.json());
 
 const allowedOrigins = ['https://mern-authentication-amber.vercel.app'];
 
-app.use(express.json());
 app.use(cookieParser());
 app.use(cors({origin: allowedOrigins, credentials: true}));
+
+await connectDB();
 
 // API Endpoints
 app.get('/', (req,res) => res.send("API Working"));
